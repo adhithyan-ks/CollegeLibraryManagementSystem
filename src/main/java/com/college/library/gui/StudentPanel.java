@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Panel for managing college student records.
+ * Designed to look consistent and fully legible across both Light and Dark OS themes.
  */
 public class StudentPanel extends JPanel {
     private final Library library;
@@ -34,7 +35,6 @@ public class StudentPanel extends JPanel {
         this.library = library;
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
-        setBackground(new Color(245, 247, 250));
 
         initComponents();
         loadStudents(null);
@@ -43,7 +43,6 @@ public class StudentPanel extends JPanel {
     private void initComponents() {
         // Top Search Bar
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        searchPanel.setOpaque(false);
 
         JLabel searchLabel = new JLabel("Search Students:");
         searchLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -83,16 +82,14 @@ public class StudentPanel extends JPanel {
 
         // Bottom Add Student Form & Actions
         JPanel formContainer = new JPanel(new BorderLayout(10, 10));
-        formContainer.setOpaque(false);
 
         JPanel inputForm = new JPanel(new GridLayout(4, 4, 10, 10));
         inputForm.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(200, 205, 210)),
+                BorderFactory.createEtchedBorder(),
                 "Register New Student",
                 TitledBorder.LEFT, TitledBorder.TOP,
                 new Font("Segoe UI", Font.BOLD, 13)
         ));
-        inputForm.setOpaque(false);
 
         ktuIdField = new JTextField();
         nameField = new JTextField();
@@ -120,19 +117,14 @@ public class StudentPanel extends JPanel {
         inputForm.add(new JLabel("Phone Number:"));
         inputForm.add(phoneField);
 
-        // Buttons
+        // Action Buttons
         JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
-        actionPanel.setOpaque(false);
 
         JButton addBtn = new JButton("Register Student");
-        addBtn.setBackground(new Color(39, 174, 96));
-        addBtn.setForeground(Color.WHITE);
         addBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         addBtn.addActionListener(e -> addStudent());
 
         JButton deleteBtn = new JButton("Remove Selected Student");
-        deleteBtn.setBackground(new Color(231, 76, 60));
-        deleteBtn.setForeground(Color.WHITE);
         deleteBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         deleteBtn.addActionListener(e -> removeSelectedStudent());
 

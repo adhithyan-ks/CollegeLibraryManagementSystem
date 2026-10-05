@@ -12,7 +12,7 @@ import java.awt.*;
  * Login window for the librarian.
  * Demonstrates:
  * - FR-01: Librarian Login authentication
- * - Clean UI layout with username and password verification
+ * - Clean UI layout adapting to OS light and dark themes
  */
 public class LoginFrame extends JFrame {
     private final Library library;
@@ -25,7 +25,7 @@ public class LoginFrame extends JFrame {
         this.library = library;
 
         setTitle("Librarian Login - College Library Management System");
-        setSize(450, 380);
+        setSize(450, 360);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +35,6 @@ public class LoginFrame extends JFrame {
 
     private void initComponents() {
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(Color.WHITE);
 
         // Header Banner
         JPanel headerPanel = new JPanel(new BorderLayout());
@@ -56,7 +55,6 @@ public class LoginFrame extends JFrame {
 
         // Form fields
         JPanel formPanel = new JPanel(new GridBagLayout());
-        formPanel.setBackground(Color.WHITE);
         formPanel.setBorder(new EmptyBorder(20, 30, 10, 30));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -87,21 +85,16 @@ public class LoginFrame extends JFrame {
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
         statusMessageLabel = new JLabel("Default login: admin / admin123", SwingConstants.CENTER);
         statusMessageLabel.setFont(new Font("Segoe UI", Font.ITALIC, 11));
-        statusMessageLabel.setForeground(new Color(127, 140, 141));
         formPanel.add(statusMessageLabel, gbc);
 
         mainPanel.add(formPanel, BorderLayout.CENTER);
 
         // Login Button Panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 15));
-        buttonPanel.setBackground(Color.WHITE);
 
         JButton loginButton = new JButton("Login to System");
         loginButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        loginButton.setBackground(new Color(41, 128, 185));
-        loginButton.setForeground(Color.WHITE);
         loginButton.setPreferredSize(new Dimension(200, 36));
-        loginButton.setFocusPainted(false);
         loginButton.addActionListener(e -> performLogin());
 
         // Press Enter to login

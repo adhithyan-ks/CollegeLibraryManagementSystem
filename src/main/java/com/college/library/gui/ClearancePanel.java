@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Panel to check student library clearance status (FR-10).
+ * Compatible with both Light and Dark OS themes.
  */
 public class ClearancePanel extends JPanel {
     private final Library library;
@@ -27,7 +28,6 @@ public class ClearancePanel extends JPanel {
         this.library = library;
         setLayout(new BorderLayout(15, 15));
         setBorder(new EmptyBorder(20, 20, 20, 20));
-        setBackground(new Color(245, 247, 250));
 
         initComponents();
     }
@@ -35,18 +35,14 @@ public class ClearancePanel extends JPanel {
     private void initComponents() {
         // Top Search Panel
         JPanel topPanel = new JPanel(new BorderLayout(10, 10));
-        topPanel.setOpaque(false);
 
         JPanel searchBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        searchBar.setOpaque(false);
 
         JLabel label = new JLabel("Enter Student KTU ID:");
         label.setFont(new Font("Segoe UI", Font.BOLD, 13));
 
         ktuIdField = new JTextField(15);
         JButton checkBtn = new JButton("Check Clearance Status");
-        checkBtn.setBackground(new Color(41, 128, 185));
-        checkBtn.setForeground(Color.WHITE);
         checkBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         checkBtn.addActionListener(e -> checkClearance());
 
@@ -58,16 +54,16 @@ public class ClearancePanel extends JPanel {
 
         // Status Card
         JPanel statusCard = new JPanel(new GridLayout(2, 1, 5, 5));
-        statusCard.setBorder(new EmptyBorder(10, 10, 10, 10));
-        statusCard.setBackground(Color.WHITE);
+        statusCard.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEtchedBorder(),
+                new EmptyBorder(10, 15, 10, 15)
+        ));
 
         statusBannerLabel = new JLabel("Enter a student KTU ID to check clearance eligibility", SwingConstants.CENTER);
-        statusBannerLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        statusBannerLabel.setForeground(new Color(108, 117, 125));
+        statusBannerLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
 
         studentDetailsLabel = new JLabel("", SwingConstants.CENTER);
         studentDetailsLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        studentDetailsLabel.setForeground(new Color(73, 80, 87));
 
         statusCard.add(statusBannerLabel);
         statusCard.add(studentDetailsLabel);
@@ -77,7 +73,6 @@ public class ClearancePanel extends JPanel {
 
         // Center: Active Borrowed Books Table
         JPanel tableContainer = new JPanel(new BorderLayout(5, 5));
-        tableContainer.setOpaque(false);
 
         JLabel tableTitle = new JLabel("Active Unreturned Books For Student");
         tableTitle.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -113,7 +108,7 @@ public class ClearancePanel extends JPanel {
             Student student = library.findStudentByKtuId(ktuId);
             if (student == null) {
                 statusBannerLabel.setText("Student not found!");
-                statusBannerLabel.setForeground(Color.RED);
+                statusBannerLabel.setForeground(new Color(231, 76, 60));
                 studentDetailsLabel.setText("No student registered with KTU ID '" + ktuId + "'.");
                 tableModel.setRowCount(0);
                 return;

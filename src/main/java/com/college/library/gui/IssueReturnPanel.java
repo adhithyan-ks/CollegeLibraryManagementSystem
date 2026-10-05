@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Panel handling book issue and return operations, including overdue fine calculations.
+ * Compatible with both Light and Dark desktop themes.
  */
 public class IssueReturnPanel extends JPanel {
     private final Library library;
@@ -35,7 +36,6 @@ public class IssueReturnPanel extends JPanel {
 
         setLayout(new BorderLayout(15, 15));
         setBorder(new EmptyBorder(15, 15, 15, 15));
-        setBackground(new Color(245, 247, 250));
 
         initComponents();
         loadTransactions();
@@ -44,18 +44,15 @@ public class IssueReturnPanel extends JPanel {
     private void initComponents() {
         // Top Section: Issue & Return Forms side-by-side
         JPanel formsGrid = new JPanel(new GridLayout(1, 2, 15, 15));
-        formsGrid.setOpaque(false);
 
         // --- Issue Book Form ---
         JPanel issueForm = new JPanel(new GridBagLayout());
         issueForm.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(41, 128, 185)),
+                BorderFactory.createEtchedBorder(),
                 "Issue Book",
                 TitledBorder.LEFT, TitledBorder.TOP,
-                new Font("Segoe UI", Font.BOLD, 13),
-                new Color(41, 128, 185)
+                new Font("Segoe UI", Font.BOLD, 13)
         ));
-        issueForm.setBackground(Color.WHITE);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(6, 8, 6, 8);
@@ -75,8 +72,6 @@ public class IssueReturnPanel extends JPanel {
 
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
         JButton issueBtn = new JButton("Confirm Book Issue");
-        issueBtn.setBackground(new Color(41, 128, 185));
-        issueBtn.setForeground(Color.WHITE);
         issueBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         issueBtn.addActionListener(e -> processIssue());
         issueForm.add(issueBtn, gbc);
@@ -84,13 +79,11 @@ public class IssueReturnPanel extends JPanel {
         // --- Return Book Form ---
         JPanel returnForm = new JPanel(new GridBagLayout());
         returnForm.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(39, 174, 96)),
+                BorderFactory.createEtchedBorder(),
                 "Return Book",
                 TitledBorder.LEFT, TitledBorder.TOP,
-                new Font("Segoe UI", Font.BOLD, 13),
-                new Color(39, 174, 96)
+                new Font("Segoe UI", Font.BOLD, 13)
         ));
-        returnForm.setBackground(Color.WHITE);
 
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(6, 8, 6, 8);
@@ -103,13 +96,11 @@ public class IssueReturnPanel extends JPanel {
         returnForm.add(returnAccessionField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 2;
-        JLabel ruleNote = new JLabel("<html><small>Loan duration: 14 days.<br>Late fine: Rs. 2.00/day.</small></html>");
+        JLabel ruleNote = new JLabel("<html><small>Standard Loan: 14 days | Overdue Fine: Rs. 2.00/day</small></html>");
         returnForm.add(ruleNote, gbc);
 
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
         JButton returnBtn = new JButton("Process Book Return");
-        returnBtn.setBackground(new Color(39, 174, 96));
-        returnBtn.setForeground(Color.WHITE);
         returnBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         returnBtn.addActionListener(e -> processReturn());
         returnForm.add(returnBtn, gbc);
@@ -120,19 +111,15 @@ public class IssueReturnPanel extends JPanel {
 
         // Center: Transaction History Table
         JPanel tableContainer = new JPanel(new BorderLayout(5, 5));
-        tableContainer.setOpaque(false);
 
         JPanel tableHeaderPanel = new JPanel(new BorderLayout());
-        tableHeaderPanel.setOpaque(false);
 
         JLabel tableTitle = new JLabel("Borrowing Transactions & History");
         tableTitle.setFont(new Font("Segoe UI", Font.BOLD, 14));
 
         JPanel tableControls = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
-        tableControls.setOpaque(false);
 
         activeOnlyCheckBox = new JCheckBox("Show Active (Unreturned) Only");
-        activeOnlyCheckBox.setOpaque(false);
         activeOnlyCheckBox.addActionListener(e -> loadTransactions());
 
         JButton refreshBtn = new JButton("Refresh");

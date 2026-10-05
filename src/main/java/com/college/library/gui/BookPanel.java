@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Panel for managing individual physical books in the library.
+ * Designed to look consistent and fully legible across both Light and Dark OS themes.
  */
 public class BookPanel extends JPanel {
     private final Library library;
@@ -35,7 +36,6 @@ public class BookPanel extends JPanel {
         this.library = library;
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
-        setBackground(new Color(245, 247, 250));
 
         initComponents();
         loadCategories();
@@ -45,7 +45,6 @@ public class BookPanel extends JPanel {
     private void initComponents() {
         // Top Search Bar
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        searchPanel.setOpaque(false);
 
         JLabel searchLabel = new JLabel("Search Books:");
         searchLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -85,16 +84,14 @@ public class BookPanel extends JPanel {
 
         // Bottom Add Book Form & Actions
         JPanel formContainer = new JPanel(new BorderLayout(10, 10));
-        formContainer.setOpaque(false);
 
         JPanel inputForm = new JPanel(new GridLayout(4, 4, 10, 10));
         inputForm.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(200, 205, 210)),
+                BorderFactory.createEtchedBorder(),
                 "Add New Physical Book Record",
                 TitledBorder.LEFT, TitledBorder.TOP,
                 new Font("Segoe UI", Font.BOLD, 13)
         ));
-        inputForm.setOpaque(false);
 
         accessionField = new JTextField();
         titleField = new JTextField();
@@ -122,19 +119,14 @@ public class BookPanel extends JPanel {
         inputForm.add(new JLabel("Category:"));
         inputForm.add(categoryComboBox);
 
-        // Buttons
+        // Action Buttons - Use native rendering so text and borders are 100% visible
         JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
-        actionPanel.setOpaque(false);
 
         JButton addBtn = new JButton("Add Book");
-        addBtn.setBackground(new Color(39, 174, 96));
-        addBtn.setForeground(Color.WHITE);
         addBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         addBtn.addActionListener(e -> addBook());
 
         JButton deleteBtn = new JButton("Remove Selected Book");
-        deleteBtn.setBackground(new Color(231, 76, 60));
-        deleteBtn.setForeground(Color.WHITE);
         deleteBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         deleteBtn.addActionListener(e -> removeSelectedBook());
 

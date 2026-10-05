@@ -55,10 +55,7 @@ public class MainFrame extends JFrame {
         userLabel.setForeground(new Color(236, 240, 241));
 
         JButton logoutBtn = new JButton("Logout");
-        logoutBtn.setFont(new Font("Segoe UI", Font.BOLD, 11));
-        logoutBtn.setBackground(new Color(231, 76, 60));
-        logoutBtn.setForeground(Color.WHITE);
-        logoutBtn.setFocusPainted(false);
+        logoutBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         logoutBtn.addActionListener(e -> handleLogout());
 
         userPanel.add(userLabel);
